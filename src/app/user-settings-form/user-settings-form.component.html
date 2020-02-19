@@ -1,6 +1,9 @@
+
+
 <div class="container">
     <h5>User Settings</h5>
     <form #form="ngForm">
+        {{diagnostic}}
         <div class="form-group">
             <label for="name">Name</label>
             <input id="name" class="form-control" name="name" placeholder="Name" />
@@ -37,8 +40,9 @@
             <textarea class="form-control" id="notes" rows="3"></textarea>
         </div>
         <button class="btn btn-primary">Send</button>
+        {{ form | json }}
     </form> 
-    {{ form | json }} 
+     
 </div>
 
 
