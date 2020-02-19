@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -132,5 +133,8 @@
       }
     }
   },
-  "defaultProject": "forms-demo"
+  "defaultProject": "forms-demo",
+  "cli": {
+    "analytics": "629660ac-f834-4587-8f60-8d51d599e778"
+  }
 }

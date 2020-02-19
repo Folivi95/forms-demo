@@ -1,0 +1,44 @@
+<div class="container">
+    <h5>User Settings</h5>
+    <form #form="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" class="form-control" name="name" placeholder="Name" />
+        </div>
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="emailOffer">
+            <label class="form-check-label" for="emailOffer"    >Email Special Offers</label>
+        </div>
+        <p>User Interface Style</p>
+        <div class="form-group">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="lightInterface" name="interfaceStyle" class="custom-control-input">
+                <label class="custom-control-label" for="lightInterface">Light</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="mediumInterface" name="interfaceStyle" class="custom-control-input">
+                <label class="custom-control-label" for="mediumInterface">Medium</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="darkInterface" name="interfaceStyle" class="custom-control-input">
+                <label class="custom-control-label" for="darkInterface">Dark</label>
+            </div> 
+        </div>
+        <div class="form-group">
+            <label for="subscriptionType">Subscription Type</label>
+            <select id="subscriptionType" class="form-control">
+                <option selected>Monthly</option>
+                <option>Annual</option>
+                <option>Lifetime</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="notes">Notes</label>
+            <textarea class="form-control" id="notes" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary">Send</button>
+    </form> 
+    {{ form | json }} 
+</div>
+
+
