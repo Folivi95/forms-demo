@@ -1,48 +1,57 @@
-
-
 <div class="container">
     <h5>User Settings</h5>
-    <form #form="ngForm">
-        {{diagnostic}}
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
         <div class="form-group">
             <label for="name">Name</label>
-            <input id="name" class="form-control" name="name" placeholder="Name" />
+            <input id="name" class="form-control" name="name" placeholder="Name" 
+                [(ngModel)]="userSettings.name" required #nameField="ngModel"
+                (blur)="onBlur(nameField)"
+                [class.field-error]="form.submitted && nameField.invalid">
+            <div [hidden]="!form.submitted || nameField.valid" class="alert alert-danger">
+                Please Enter a Name
+            </div>
         </div>
+        <div class="form-group">
+            <div class="col-xs-12 col-12 col-md-4 form-group">
+                <label for="startDate">Start Date</label>
+                <input type="text"
+                       placeholder="Start Date"
+                       class="form-control"
+                       [(ngModel)]="startDate" name="startDate" id="startDate"
+                       bsDatepicker>
+            </div>
+        </div>
+
         <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="emailOffer">
-            <label class="form-check-label" for="emailOffer"    >Email Special Offers</label>
+            <input type="checkbox" class="form-check-input" id="emailOffer" name="emailOffer" [(ngModel)]="userSettings.emailOffer">
+            <label class="form-check-label" for="emailOffer">Email Special Offers</label>
         </div>
         <p>User Interface Style</p>
         <div class="form-group">
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="lightInterface" name="interfaceStyle" class="custom-control-input">
-                <label class="custom-control-label" for="lightInterface">Light</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="mediumInterface" name="interfaceStyle" class="custom-control-input">
-                <label class="custom-control-label" for="mediumInterface">Medium</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="darkInterface" name="interfaceStyle" class="custom-control-input">
-                <label class="custom-control-label" for="darkInterface">Dark</label>
-            </div> 
+            <div class="btn-group">
+                <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="interfaceStype"
+                       btnRadio="Light" tabindex="0" role="button">Light</label>
+                <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="interfaceStype"
+                       btnRadio="Medium" tabindex="0" role="button">Medium</label>
+                <label class="btn btn-primary" [(ngModel)]="userSettings.interfaceStyle" name="interfaceStype"
+                       btnRadio="Dark" tabindex="0" role="button">Dark</label>
+              </div>
         </div>
         <div class="form-group">
             <label for="subscriptionType">Subscription Type</label>
-            <select id="subscriptionType" class="form-control">
-                <option selected>Monthly</option>
-                <option>Annual</option>
-                <option>Lifetime</option>
+            <select id="subscriptionType" name="subscriptionType" class="form-control" [(ngModel)]="userSettings.subscriptionType">
+                <option *ngFor="let type of subscriptionTypes | async">{{ type }}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="notes">Notes</label>
-            <textarea class="form-control" id="notes" rows="3"></textarea>
+            <textarea class="form-control" name="notes" id="notes" rows="3" [(ngModel)]="userSettings.notes"></textarea>
         </div>
-        <button class="btn btn-primary">Send</button>
-        {{ form | json }}
-    </form> 
-     
-</div>
 
+        <div [hidden]="!postError" class="alert alert-danger">
+            {{postErrorMessage}}
+        </div>
+        <button class="btn btn-primary">Send</button>       
+    </form>    
+</div>
 
